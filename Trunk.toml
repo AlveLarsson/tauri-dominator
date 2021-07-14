@@ -1,0 +1,27 @@
+[build]
+target = "static\\index.html"
+release = false
+dist = "dist"
+
+[watch]
+path = ["src", "static"]
+ignore = []
+
+[serve]
+port = 8080
+open = false
+
+[clean]
+dist = "dist"
+cargo = false
+
+[[proxy]]
+backend = "ws://localhost:9000/api/ws"
+ws = true
+
+[[proxy]]
+rewrite = "/api/v1/"
+backend = "http://localhost:9000/"
+
+[[proxy]]
+backend = "http://localhost:9000/api/v2/"
